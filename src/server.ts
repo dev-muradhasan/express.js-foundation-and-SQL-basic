@@ -1,7 +1,6 @@
 import express, { type Application, type Request, type Response } from "express"
 import { Pool } from "pg"
-import dotenv from "dotenv";
-dotenv.config();
+import config from "./config";
 const app: Application = express();
 const port = process.env.PORT;
 
@@ -10,7 +9,7 @@ app.use(express.text());
 app.use(express.urlencoded({ extended: true }))
 
 const pool = new Pool({
-    connectionString: process.env.DATABASE_URL
+    connectionString: config.connection_url
 })
 
 const initDB = async () => {
@@ -96,11 +95,18 @@ app.get("/api/v1/users/:id", async (req: Request, res: Response) => {
             SELECT * FROM users WHERE id = $1
             `, [id])
         // console.log(result);
+        if (result.rowCount === 0) {
+            res.status(404).send({
+                success: false,
+                message: "User not found!",
+            })
+        }
         res.status(201).send({
             success: true,
             message: "User retrieved successfully!",
             data: result.rows[0],
         })
+
     } catch (error: any) {
         res.status(500).send({
             success: false,
@@ -124,7 +130,12 @@ app.put("/api/v1/users/:id", async (req: Request, res: Response) => {
             updated_at = NOW()
             WHERE id = $5 RETURNING *
             `, [name ?? null, password ?? null, age ?? null, is_Active ?? null, id])
-
+        if (result.rowCount === 0) {
+            res.status(404).send({
+                success: false,
+                message: "User not found!",
+            })
+        }
         res.status(201).send({
             success: true,
             message: "User updated successfully!",
@@ -139,6 +150,33 @@ app.put("/api/v1/users/:id", async (req: Request, res: Response) => {
     }
 })
 
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
+app.delete("/api/v1/users/:id", async (req: Request, res: Response) => {
+    try {
+        const { id } = req.params
+        const result = await pool.query(`
+            DELETE FROM users WHERE id = $1
+            `,[id])
+        
+        if(result.rowCount === 0){
+            res.status(404).send({
+                success: false,
+                message: "User not found!",
+            })
+        }
+
+        res.status(200).send({
+            success: true,
+            message: "User deleted successfully!",
+        })
+    } catch (error: any) {
+        res.status(500).send({
+            success: false,
+            message: error?.message,
+            error: error
+        })
+    }
+})
+
+app.listen(config.port, () => {
+    console.log(`Example app listening on port ${config.port}`);
 });
