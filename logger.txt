@@ -1,0 +1,6 @@
+Method: GET | URL: / | Time: Date.now()
+Method: GET | URL: / | Time: Date.now()
+
+Method: GET | URL: /api/v1/users | Time: Date.now()
+
+Method: GET | URL: /api/v1/users/8 | Time: Date.now()
