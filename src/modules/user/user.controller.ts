@@ -22,7 +22,7 @@ const createUser = async (req: Request, res: Response) => {
 const getAllUser = async (req: Request, res: Response) => {
     try {
         const result = await userService.getAllUserFromDB()
-        res.status(201).send({
+        res.status(200).send({
             success: true,
             message: "User retrieved successfully!",
             data: result.rows,
@@ -47,7 +47,7 @@ const getSingleUser = async (req: Request, res: Response) => {
                 message: "User not found!",
             })
         }
-        res.status(201).send({
+        res.status(200).send({
             success: true,
             message: "User retrieved successfully!",
             data: result.rows[0],
