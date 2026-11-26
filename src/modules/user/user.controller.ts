@@ -1,17 +1,19 @@
 import type { Request, Response } from "express";
 import { userService } from "./user.service";
+import sendResponse from "../../utils/sendResponse";
 
 const createUser = async (req: Request, res: Response) => {
     try {
        const result = await userService.createUserIntoDB(req.body)
-
-        res.status(201).send({
+        sendResponse(res, {
+            statusCode: 201,
             success: true,
             message: "User created!!",
             data: result.rows[0],
         })
     } catch (error: any) {
-        res.status(500).send({
+        sendResponse(res, {
+            statusCode: 500,
             success: false,
             message: error?.message,
             error: error
@@ -22,13 +24,15 @@ const createUser = async (req: Request, res: Response) => {
 const getAllUser = async (req: Request, res: Response) => {
     try {
         const result = await userService.getAllUserFromDB()
-        res.status(200).send({
+        sendResponse(res, {
+            statusCode: 200,
             success: true,
             message: "User retrieved successfully!",
             data: result.rows,
         })
     } catch (error: any) {
-        res.status(500).send({
+        sendResponse(res, {
+            statusCode: 500,
             success: false,
             message: error?.message,
             error: error
@@ -42,19 +46,21 @@ const getSingleUser = async (req: Request, res: Response) => {
        const result = await userService.getSingleUserFromDB(id as string)
       
         if (result.rowCount === 0) {
-            res.status(404).send({
+            sendResponse(res, {
+                statusCode: 404,
                 success: false,
-                message: "User not found!",
+                message: "User not found!!",
             })
         }
-        res.status(200).send({
+        sendResponse(res, {
+            statusCode: 200,
             success: true,
-            message: "User retrieved successfully!",
+            message: "User retrieved successfully!!",
             data: result.rows[0],
         })
-
     } catch (error: any) {
-        res.status(500).send({
+        sendResponse(res, {
+            statusCode: 500,
             success: false,
             message: error?.message,
             error: error
@@ -67,18 +73,21 @@ const updateUser = async (req: Request, res: Response) => {
         const { id } = req.params
        const result = await userService.updateUserFromDB(req.body, id as string)
         if (result.rowCount === 0) {
-            res.status(404).send({
+            sendResponse(res, {
+                statusCode: 404,
                 success: false,
-                message: "User not found!",
+                message: "User not found!!",
             })
         }
-        res.status(201).send({
+        sendResponse(res, {
+            statusCode: 201,
             success: true,
-            message: "User updated successfully!",
+            message: "User updated successfully!!",
             data: result.rows[0],
         })
     } catch (error: any) {
-        res.status(500).send({
+        sendResponse(res, {
+            statusCode: 500,
             success: false,
             message: error?.message,
             error: error
@@ -91,17 +100,20 @@ const deleteUser = async (req: Request, res: Response) => {
         const { id } = req.params
         const result = await userService.deleteUserFromDB(id as string)
         if (result.rowCount === 0) {
-            res.status(404).send({
+            sendResponse(res, {
+                statusCode: 404,
                 success: false,
-                message: "User not found!",
+                message: "User not found!!",
             })
         }
-        res.status(200).send({
+        sendResponse(res, {
+            statusCode: 200,
             success: true,
             message: "User deleted successfully!",
         })
     } catch (error: any) {
-        res.status(500).send({
+        sendResponse(res, {
+            statusCode: 500,
             success: false,
             message: error?.message,
             error: error

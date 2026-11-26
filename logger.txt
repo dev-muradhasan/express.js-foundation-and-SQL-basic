@@ -170,3 +170,41 @@ Method: POST | URL: /api/v1/auth/login | Time: 1795634453370
 Method: POST | URL: /api/v1/auth/refresh-token | Time: 1795634457143
 
 Method: POST | URL: /api/v1/auth/refresh-token | Time: 1795634499274
+
+Method: POST | URL: /api/v1/auth/login | Time: 1795699210045
+
+Method: POST | URL: /api/v1/auth/login | Time: 1795699265049
+
+Method: POST | URL: /api/v1/auth/login | Time: 1795699271157
+
+Method: POST | URL: /api/v1/auth/login | Time: 1795699281588
+
+Method: POST | URL: /api/v1/auth/login | Time: 1795699325087
+
+Method: POST | URL: /api/v1/users | Time: 1795700032507
+
+Method: POST | URL: /api/v1/users | Time: 1795700048751
+
+Method: GET | URL: /api/v1/users | Time: 1795700062177
+
+Method: POST | URL: /api/v1/auth/login | Time: 1795700081751
+
+Method: GET | URL: /api/v1/users | Time: 1795700099901
+
+Method: GET | URL: /api/v1/users/5 | Time: 1795700108446
+
+Method: GET | URL: /api/v1/users/6 | Time: 1795700114097
+
+Method: GET | URL: /api/v1/users/7 | Time: 1795700138063
+
+Method: PUT | URL: /api/v1/users/7 | Time: 1795700158780
+
+Method: POST | URL: /api/v1/auth/login | Time: 1795700195790
+
+Method: PUT | URL: /api/v1/users/7 | Time: 1795700238795
+
+Method: POST | URL: /api/v1/auth/login | Time: 1795700275957
+
+Method: DELETE | URL: /api/v1/users/1 | Time: 1795700296368
+
+Method: PUT | URL: /api/v1/users/7 | Time: 1795700351199
