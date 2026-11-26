@@ -9,12 +9,12 @@ const loginUser = async(req: Request, res: Response)=>{
         const {refreshToken} = result;
 
         res.cookie("refreshToken", refreshToken, {
-            secure: false,   // http -> false, https -> true, in production -> true
+            secure: true,   // http -> false, https -> true, in production -> true
             httpOnly: true,  // prevent XSS attack
             sameSite: "lax",  // "none", "strick", "lax"  \ CSRF
             // maxAge
             path: "/",
-            domain: "localhost",  // in production .example.com
+            // domain: "localhost",  // in production .example.com
         }) 
 
         delete result.user.password;
